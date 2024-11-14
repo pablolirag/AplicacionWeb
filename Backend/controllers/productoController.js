@@ -34,13 +34,62 @@ var productoController = function(Producto) {
 		
 	};
 	
-	return {
-		
-		post: post,
-		
-		get: get
-		
-	};
+
+    // Método DELETE: Eliminar un producto por ID
+    var del = async function (req, res) {
+        const id = req.params.id;
+        const producto = await Producto.findByIdAndDelete(id);
+
+        if (!producto) {
+            res.status(404).send('Producto no encontrado');
+        } else {
+            res.status(200).send('Producto eliminado');
+        }
+    };
+
+    // Método PATCH: Actualizar parcialmente un producto por ID
+    var patch = async function (req, res) {
+        const id = req.params.id;
+        const updates = req.body;
+
+        const producto = await Producto.findById(id);
+
+        if (!producto) {
+            res.status(404).send('Producto no encontrado');
+        } else {
+            Object.keys(updates).forEach((key) => {
+                producto[key] = updates[key];
+            });
+
+            await producto.save();
+            res.status(200).send('Producto actualizado parcialmente');
+        }
+    };
+
+    // Método PUT: Actualizar completamente un producto por ID
+    var put = async function (req, res) {
+        const id = req.params.id;
+        const updatedData = req.body;
+
+        const producto = await Producto.findByIdAndUpdate(id, updatedData, {
+            new: true, // Devuelve el documento actualizado
+            runValidators: true // Ejecuta las validaciones del modelo
+        });
+
+        if (!producto) {
+            res.status(404).send('Producto no encontrado');
+        } else {
+            res.status(200).send('Producto actualizado completamente');
+        }
+    };
+
+    return {
+        post: post,
+        get: get,
+        delete: del,
+        patch: patch,
+        put: put
+    };
 	
 };
 
