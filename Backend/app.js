@@ -27,12 +27,22 @@ var productoRouter = require('./Routes/productoRoutes')(Producto);
 
 app.use('/api/Producto', productoRouter);
 
+var sucursalRouter = require('./Routes/sucursalRouter')(Sucursal);
+
+app.use('/api/Sucursal', sucursalRouter);
+
+var stockRouter = require('./Routes/stockRouter')(Stock);
+
+app.use('/api/Stock', stockRouter);
+
 
 app.get('/', function(req, res){
 	
 	res.send('Hola Mundo!');
 	
 });
+
+/////////////////// PRODUCTOS ///////////////////
 
 app.get('/productos.html', function(req, res){
 	
@@ -52,6 +62,46 @@ app.get('/modificarProducto.html', function(req, res){
 	
 });
 
+
+/////////////////// SUCURSALES ///////////////////
+
+app.get('/sucursales.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/sucursal.html'));
+	
+});
+
+app.get('/agregarSucursal.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/agregarSucursal.html'));
+	
+});
+
+app.get('/modificarSucursal.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/modificarSucursal.html'));
+	
+});
+
+/////////////////// STOCKS ///////////////////
+
+app.get('/stock.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/stock.html'));
+	
+});
+
+app.get('/agregarStock.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/agregarStock.html'));
+	
+});
+
+app.get('/modificarStock.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/modificarStock.html'));
+	
+});
 
 ///////////////////////////////
 

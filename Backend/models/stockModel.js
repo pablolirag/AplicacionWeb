@@ -24,4 +24,4 @@ var stockModel = new Schema({
     
 });
 
-module.exports = mongoose.model('Stock', productoModel);
+module.exports = mongoose.model('Stock', stockModel);

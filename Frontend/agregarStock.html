@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<title>Agregar Stock</title>
+		<script type="text/javascript" src="./jquery-1.12.1.min.js"></script>
+		<script type="text/javascript">
+		
+			$(function(){
+			
+				$('#agregar-stock').click(function(){
+				
+					$.ajax({
+				
+						url: 'http://localhost:3000/api/stock',
+						
+						type: 'POST',
+						
+						data: {
+						
+							productoCodigo: $('#sucursalCodigo').val(),
+							
+							productoNombre: $('#productoCodigo').val(),
+							
+							productoDescripcion: $('#cantidad').val()
+						
+						},
+						
+						error: function (xhr, ajaxOptions, thrownError) {
+						
+							alert(xhr.status);
+							
+							alert(thrownError);
+							
+						},
+						
+						success: function(result) {
+						
+							alert(result);
+							
+						}
+						
+					});
+				
+				});
+			
+			});
+		
+		</script>
+	</head>
+	<body>
+		<h1>Nuevo producto</h1>
+		<h5><a href="stock.html">Volver</a></h5>
+		<table border="1">
+			<tr><td>Sucursal:</td><td><input type="text" id="sucursalCodigo" /></td></tr>
+			<tr><td>Producto:</td><td><input type="text" id="productoCodigo" /></td></tr>
+			<tr><td>Cantidad:</td><td><textarea rows="5" id="cantidad"></textarea></td></tr>
+		</table>
+		<input type="button" id="stock-producto" value="Guardar" />
+		<span id="mensaje-resultado"></span>
+		<br />
+		<a href="javascript:history.go(0);">Refrescar</a>
+	</body>
+</html>
