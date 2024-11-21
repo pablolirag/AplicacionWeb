@@ -8,9 +8,11 @@ var path = require('path');
 
 
 
-var db = mongoose.connect('mongodb://mongo:27017/AplicacionWeb');
+var db = mongoose.connect('mongodb://localhost:27017/AplicacionWeb');
 
 var Producto = require('./models/productoModel');
+var Stock = require('./models/stockModel');
+var Sucursal = require('./models/sucursalModel');
 
 var app = express();
 
@@ -62,46 +64,6 @@ app.get('/modificarProducto.html', function(req, res){
 	
 });
 
-
-/////////////////// SUCURSALES ///////////////////
-
-app.get('/sucursales.html', function(req, res){
-	
-    res.sendFile(path.resolve('../Frontend/sucursal.html'));
-	
-});
-
-app.get('/agregarSucursal.html', function(req, res){
-	
-    res.sendFile(path.resolve('../Frontend/agregarSucursal.html'));
-	
-});
-
-app.get('/modificarSucursal.html', function(req, res){
-	
-    res.sendFile(path.resolve('../Frontend/modificarSucursal.html'));
-	
-});
-
-/////////////////// STOCKS ///////////////////
-
-app.get('/stock.html', function(req, res){
-	
-    res.sendFile(path.resolve('../Frontend/stock.html'));
-	
-});
-
-app.get('/agregarStock.html', function(req, res){
-	
-    res.sendFile(path.resolve('../Frontend/agregarStock.html'));
-	
-});
-
-app.get('/modificarStock.html', function(req, res){
-	
-    res.sendFile(path.resolve('../Frontend/modificarStock.html'));
-	
-});
 
 ///////////////////////////////
 
