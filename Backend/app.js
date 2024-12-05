@@ -29,11 +29,11 @@ var productoRouter = require('./Routes/productoRoutes')(Producto);
 
 app.use('/api/Producto', productoRouter);
 
-var sucursalRouter = require('./Routes/sucursalRouter')(Sucursal);
+var sucursalRouter = require('./Routes/sucursalRoutes')(Sucursal);
 
 app.use('/api/Sucursal', sucursalRouter);
 
-var stockRouter = require('./Routes/stockRouter')(Stock);
+var stockRouter = require('./Routes/stockRoutes')(Stock);
 
 app.use('/api/Stock', stockRouter);
 

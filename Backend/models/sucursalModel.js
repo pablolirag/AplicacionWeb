@@ -5,21 +5,15 @@ var Schema = mongoose.Schema;
 var sucursalModel = new Schema({
     
     sucursalCodigo: {
-        
-        type: String
-        
+        type: mongoose.Schema.Types.ObjectId
     },
     
     sucursalNombre: {
-        
         type: String
-        
     },
     
     sucursalDescripcion: {
-        
         type: String
-        
     }
     
 });

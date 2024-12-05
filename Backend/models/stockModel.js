@@ -5,14 +5,14 @@ var Schema = mongoose.Schema;
 var stockModel = new Schema({
     
     sucursalCodigo: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Sucursal',
         required: true
         
     },
     
     productoCodigo: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Producto',
         required: true
     },
