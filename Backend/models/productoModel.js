@@ -3,8 +3,13 @@
  var Schema = mongoose.Schema;
  
  var productoModel = new Schema({
+	id: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true
+	},
 	productoCodigo: {
-		type: mongoose.Schema.Types.ObjectId
+		type: String,
+        required: true
 	},
 	productoNombre: {
 		type: String

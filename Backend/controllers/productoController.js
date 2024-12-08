@@ -1,8 +1,14 @@
+var mongoose = require('mongoose');
+
 var productoController = function(Producto) {
 	
 	var post = async function(req, res){
 		
-		var producto = new Producto(req.body);
+		var producto = new Producto({
+			productoCodigo: mongoose.Schema.Types.ObjectId(req.body.productoCodigo),
+			productoNombre: req.body.productoNombre,
+			productoDescripcion: req.body.productoDescripcion
+		});
 		
 		await producto.save();
 		

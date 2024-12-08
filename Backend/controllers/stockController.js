@@ -1,8 +1,14 @@
+var mongoose = require('mongoose');
+
 var stockController = function(Stock) {
 	
 	var post = async function(req, res){
 		
-		var stock = new Stock(req.body);
+		var stock = new Stock({
+			sucursalCodigo: mongoose.Schema.Types.ObjectId(req.body.sucursalCodigo),
+			productoCodigo: mongoose.Schema.Types.ObjectId(req.body.productoCodigo),
+			cantidad: req.body.cantidad
+		});
 		
 		await stock.save();
 		
@@ -44,4 +50,4 @@ var stockController = function(Stock) {
 	
 };
 
-module.exports = stocksController;
+module.exports = stockController;

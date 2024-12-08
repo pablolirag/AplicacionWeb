@@ -8,7 +8,6 @@ var stockModel = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Sucursal',
         required: true
-        
     },
     
     productoCodigo: {
