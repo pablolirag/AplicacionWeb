@@ -1,22 +1,20 @@
- var mongoose = require('mongoose');
+var mongoose = require('mongoose');
  
- var Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
  
- var productoModel = new Schema({
-	id: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: true
-	},
+var productoModel = new Schema({
 	productoCodigo: {
 		type: String,
         required: true
 	},
 	productoNombre: {
-		type: String
+		type: String,
+		required: true
 	}, 
 	productoDescripcion: {	 
-		type: String
+		type: String,
+		required: true
 	} 
- });
+});
  
  module.exports = mongoose.model('Producto', productoModel);

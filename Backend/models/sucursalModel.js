@@ -3,20 +3,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var sucursalModel = new Schema({
-    
     sucursalCodigo: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
-    
     sucursalNombre: {
-        type: String
+        type: String,
+		required: true
     },
-    
     sucursalDescripcion: {
-        type: String
+        type: String,
+		required: true
     }
-    
 });
 
 module.exports = mongoose.model('Sucursal', sucursalModel);

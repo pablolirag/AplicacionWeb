@@ -5,56 +5,90 @@
 		<script type="text/javascript">
 		
 			$(function(){
-			
-				$('#agregar-stock').click(function(){
-				
-					$.ajax({
-				
-						url: 'http://localhost:3000/api/stock',
-						
-						type: 'POST',
-						
-						data: {
-						
-							productoCodigo: $('#sucursalCodigo').val(),
-							
-							productoNombre: $('#productoCodigo').val(),
-							
-							productoDescripcion: $('#cantidad').val()
-						
-						},
-						
-						error: function (xhr, ajaxOptions, thrownError) {
-						
-							alert(xhr.status);
-							
-							alert(thrownError);
-							
-						},
-						
-						success: function(result) {
-						
-							alert(result);
-							
+				$.ajax({
+					url: 'http://localhost:3000/api/sucursal',
+					type: 'GET',
+					error: function (xhr, ajaxOptions, thrownError) {
+						alert(xhr.status);
+						alert(thrownError);
+					},
+					success: function(result) {
+						console.log(result);
+						if (result.length) {
+							var select = document.getElementById("sucursalCodigo")
+							for(i = 0;i < result.length; i++) {
+								var opt = document.createElement('option');
+								opt.value = result[i]._id;
+								opt.innerHTML = result[i].sucursalNombre;
+								select.appendChild(opt);
+							}
 						}
 						
-					});
-				
+					}
 				});
-			
+				$.ajax({
+					url: 'http://localhost:3000/api/producto',
+					type: 'GET',
+					error: function (xhr, ajaxOptions, thrownError) {
+						alert(xhr.status);
+						alert(thrownError);
+					},
+					success: function(result) {
+						console.log(result);
+						if (result.length) {
+							var select = document.getElementById("productoCodigo")
+							for(i = 0;i < result.length; i++) {
+								var opt = document.createElement('option');
+								opt.value = result[i]._id;
+								opt.innerHTML = result[i].productoCodigo;
+								select.appendChild(opt);
+							}
+						}
+						
+					}
+				});
+				$('#agregar-stock').click(function(){
+					$.ajax({
+						url: 'http://localhost:3000/api/stock',
+						type: 'POST',
+						data: {
+							sucursalCodigo: $('#sucursalCodigo').val(),
+							productoCodigo: $('#productoCodigo').val(),
+							cantidad: $('#cantidad').val()
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+							alert(xhr.status);
+							alert(thrownError);
+						},
+						success: function(result) {
+							alert(result);
+						}
+					});
+				});
 			});
-		
 		</script>
 	</head>
 	<body>
 		<h1>Nuevo producto</h1>
 		<h5><a href="stock.html">Volver</a></h5>
 		<table border="1">
-			<tr><td>Sucursal:</td><td><input type="text" id="sucursalCodigo" /></td></tr>
-			<tr><td>Producto:</td><td><input type="text" id="productoCodigo" /></td></tr>
-			<tr><td>Cantidad:</td><td><textarea rows="5" id="cantidad"></textarea></td></tr>
+			<tr>
+				<td>Sucursal:</td>
+				<td>
+					<select name="sucursalCodigo" id="sucursalCodigo">
+				  	</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Producto:</td>
+				<td>
+					<select name="productoCodigo" id="productoCodigo">
+				  	</select>
+				</td>
+			</tr>
+			<tr><td>Cantidad:</td><td><input type="text" id="cantidad"/></td></tr>
 		</table>
-		<input type="button" id="stock-producto" value="Guardar" />
+		<input type="button" id="agregar-stock" value="Guardar" />
 		<span id="mensaje-resultado"></span>
 		<br />
 		<a href="javascript:history.go(0);">Refrescar</a>

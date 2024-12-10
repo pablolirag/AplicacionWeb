@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<title>Modificar stock</title>
+		<script type="text/javascript" src="./jquery-1.12.1.min.js"></script>
+		<script type="text/javascript">
+		
+			function getParameterByName(name, url) {
+				if (!url) url = window.location.href;
+				name = name.replace(/[\[\]]/g, "\\$&");
+				var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+				results = regex.exec(url);
+				if (!results) return null;
+				if (!results[2]) return '';
+				return decodeURIComponent(results[2].replace(/\+/g, " "));
+			}
+		
+			$(function(){
+				$('#_id').val(getParameterByName('_id'));
+				$.ajax({
+					url: 'http://localhost:3000/api/stock/' + $('#_id').val(),
+					type: 'GET',
+					error: function (xhr, ajaxOptions, thrownError) {
+						alert(xhr.status);
+						alert(thrownError);	
+					},
+					success: function(result) {
+                        $('#sucursalNombre').val(result.sucursalCodigo.sucursalNombre);
+                        $('#productoNombre').val(result.productoCodigo.productoNombre);
+						$('#cantidad').val(result.cantidad);
+					}
+				});
+
+				$('#modificar-stock').click(function(){
+					$.ajax({
+						url: 'http://localhost:3000/api/stock/' + $('#_id').val(),
+						type: 'PUT',
+						data: {
+							_id: $('#_id').val(),
+							cantidad: $('#cantidad').val()
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+							alert(xhr.status);
+							alert(thrownError);
+						},
+						success: function(result) {
+							alert(result);
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Modificar stock</h1>
+		<h5><a href="stock.html">Volver</a></h5>
+		<table border="1">
+			<tr><td>Sucursal:</td><td><input type="text" id="sucursalNombre" disabled /></td></tr>
+			<tr><td>Producto:</td><td><input type="text" id="productoNombre" disabled /></td></tr>
+			<tr><td>Cantidad:</td><td><input type="number" id="cantidad" /></td></tr>
+		</table>
+		<input type="hidden" id="_id" />
+		<input type="button" id="modificar-stock" value="Guardar" />
+		<span id="mensaje-resultado"></span>
+		<br />
+		<a href="javascript:history.go(0);">Refrescar</a>
+	</body>
+</html>

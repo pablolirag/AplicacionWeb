@@ -16,12 +16,9 @@ var app = express();
 
 var port = process.env.PORT || 3000;
 
-
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
-
 
 var productoRouter = require('./Routes/productoRoutes')(Producto);
 
@@ -62,6 +59,45 @@ app.get('/modificarProducto.html', function(req, res){
 	
 });
 
+/////////////////// SUCURSALES ///////////////////
+
+app.get('/sucursal.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/sucursal.html'));
+	
+});
+
+app.get('/agregarSucursal.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/agregarSucursal.html'));
+	
+});
+
+app.get('/modificarSucursal.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/modificarSucursal.html'));
+	
+});
+
+/////////////////// STOCK ///////////////////
+
+app.get('/stock.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/stock.html'));
+	
+});
+
+app.get('/agregarStock.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/agregarStock.html'));
+	
+});
+
+app.get('/modificarStock.html', function(req, res){
+	
+    res.sendFile(path.resolve('../Frontend/modificarStock.html'));
+	
+});
 
 ///////////////////////////////
 

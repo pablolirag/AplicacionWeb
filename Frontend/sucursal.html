@@ -3,92 +3,56 @@
 		<title>Listado de Sucursales</title>
 		<script type="text/javascript" src="/jquery-1.12.1.min.js"></script>
 		<script type="text/javascript">
-		
 			function EliminarProducto(id){
-				
 				$.ajax({
-			
 					url: 'http://localhost:3000/api/sucursal/' + id,
-					
 					type: 'DELETE',
-					
 					error: function (xhr, ajaxOptions, thrownError) {
-					
 						alert(xhr.status);
-						
 						alert(thrownError);
-						
 					},
-					
 					success: function(result) {
-					
 						alert(result);
-						
 						Refrescar();
-						
 					}
-					
 				});
-			
 			}
-			
+
 			function Refrescar() {
-				
 					$('#listado-sucursales').html('');
-					
 					$('#listado-sucursales').append('<tr><td>C&oacute;digo</td><td>Nombre</td><td>Descripci&oacute;n</td><td>Acciones</td></tr>');
-				
 					$.ajax({
-						
 						url: 'http://localhost:3000/api/sucursal',
-						
 						type: 'GET',
-						
 						error: function (xhr, ajaxOptions, thrownError) {
-						
 							alert(xhr.status);
-							
 							alert(thrownError);
-							
 						},
-						
 						success: function(result) {
-						
 							if (result.length) {
-							
 								for(i = 0;i < result.length; i++) {
-								
-									$('#listado-sucursales').append('<tr><td>' + result[i].sucursalCodigo + '</td><td>' + 
-																				result[i].sucursalNombre + '</td><td>' + 
-																				result[i].sucursalDescripcion + '</td><td>' + 
-																				'<a href="modificarSucursal.html?_id=' + result[i]._id + '">Modificar</a> | <a class="eliminar" href="javascript:EliminarSucursal(\'' + result[i]._id + '\');">Eliminar</a></td></tr>');
-								
+									$('#listado-sucursales').append(
+										'<tr><td>' + result[i].sucursalCodigo + '</td><td>' + 
+										result[i].sucursalNombre + '</td><td>' + 
+										result[i].sucursalDescripcion + '</td><td>' + 
+										'<a href="modificarSucursal.html?_id=' + result[i]._id + '">Modificar</a> | <a class="eliminar" href="javascript:EliminarSucursal(\'' + result[i]._id + '\');">Eliminar</a></td></tr>'
+									);
 								}
-							
-							}
-							else {
-							
+							} else {
 								$('#listado-sucursales').append('<tr><td colspan="4">No se encontraron sucursales.</td></tr>');
-							
 							}
-							
 						}
 					});
-				
 				}
-		
 			$(function(){
-			
 				Refrescar();
-			
 			});
-		
 		</script>
 	</head>
 	<body>
-		<div><a href="sucursales.html">Sucursales</a> | <a href="productos.html">Productos</a> | <a href="stock.html">Stock</a></div>
+		<div><a href="sucursal.html">Sucursales</a> | <a href="productos.html">Productos</a> | <a href="stock.html">Stock</a></div>
 		<h1>Listado de sucursales</h1>
-		<a href="agregarProducto.html">Agregar</a><br /><br />
+		<a href="agregarSucursal.html">Agregar</a><br /><br />
 		<table id="listado-sucursales" border="1">
 		</table>
 		<br />
