@@ -15,11 +15,11 @@
 							productoDescripcion: $('#productoDescripcion').val()
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
-							alert(xhr.status);
-							alert(thrownError);
+							alert(xhr.responseText);
 						},
 						success: function(result) {
 							alert(result);
+							window.location.href = 'productos.html';
 						}
 					});
 				});

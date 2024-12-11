@@ -20,10 +20,8 @@
 					url: 'http://localhost:3000/api/sucursal/' + $('#_id').val(),
 					type: 'GET',
 					error: function (xhr, ajaxOptions, thrownError) {
-						alert(xhr.status);
-						alert(thrownError);
+						alert(xhr.responseText);
 					},
-					
 					success: function(result) {
 						$('#sucursalCodigo').val(result.sucursalCodigo);
 						$('#sucursalNombre').val(result.sucursalNombre);
@@ -42,8 +40,7 @@
 							sucursalDescripcion: $('#sucursalDescripcion').val()
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
-							alert(xhr.status);
-							alert(thrownError);
+							alert(xhr.responseText);
 						},
 						success: function(result) {
 							alert(result);

@@ -8,24 +8,22 @@
 					url: 'http://localhost:3000/api/stock/' + id,
 					type: 'DELETE',
 					error: function (xhr, ajaxOptions, thrownError) {
-						alert(xhr.status);
-						alert(thrownError);
+						alert(xhr.responseText);
 					},
 					success: function(result) {
 						alert(result);
 						Refrescar();
 					}
-				});			
+				});
 			}
 			function Refrescar() {	
 				$('#listado-stock').html('');
-				$('#listado-stock').append('<tr><td>C&oacute;digo</td><td>Nombre</td><td>Descripci&oacute;n</td><td>Acciones</td></tr>');
+				$('#listado-stock').append('<tr><td>Sucursal</td><td>Producto</td><td>Cantidad</td><td>Acciones</td></tr>');
 				$.ajax({
 					url: 'http://localhost:3000/api/stock',
 					type: 'GET',
 					error: function (xhr, ajaxOptions, thrownError) {
-						alert(xhr.status);
-						alert(thrownError);	
+						alert(xhr.responseText);
 					},
 					success: function(result) {
 						if (result.length) {

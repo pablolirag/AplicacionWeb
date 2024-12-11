@@ -20,10 +20,8 @@
 					url: 'http://localhost:3000/api/producto/' + $('#_id').val(),
 					type: 'GET',
 					error: function (xhr, ajaxOptions, thrownError) {
-						alert(xhr.status);
-						alert(thrownError);
+						alert(xhr.responseText);
 					},
-					
 					success: function(result) {
 						$('#productoCodigo').val(result.productoCodigo);
 						$('#productoNombre').val(result.productoNombre);
@@ -42,8 +40,7 @@
 							productoDescripcion: $('#productoDescripcion').val()
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
-							alert(xhr.status);
-							alert(thrownError);
+							alert(xhr.responseText);
 						},
 						success: function(result) {
 							alert(result);

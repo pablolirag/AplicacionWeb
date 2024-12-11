@@ -8,8 +8,7 @@
 					url: 'http://localhost:3000/api/sucursal/' + id,
 					type: 'DELETE',
 					error: function (xhr, ajaxOptions, thrownError) {
-						alert(xhr.status);
-						alert(thrownError);
+						alert(xhr.responseText);
 					},
 					success: function(result) {
 						alert(result);
@@ -25,8 +24,7 @@
 						url: 'http://localhost:3000/api/sucursal',
 						type: 'GET',
 						error: function (xhr, ajaxOptions, thrownError) {
-							alert(xhr.status);
-							alert(thrownError);
+							alert(xhr.responseText);
 						},
 						success: function(result) {
 							if (result.length) {

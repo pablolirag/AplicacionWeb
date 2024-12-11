@@ -39,8 +39,7 @@
 							cantidad: $('#cantidad').val()
 						},
 						error: function (xhr, ajaxOptions, thrownError) {
-							alert(xhr.status);
-							alert(thrownError);
+							alert(xhr.responseText);
 						},
 						success: function(result) {
 							alert(result);
