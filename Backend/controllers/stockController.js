@@ -3,13 +3,23 @@ var mongoose = require('mongoose');
 var stockController = function(Stock) {
 	
 	var post = async function(req, res){
-		var stock = new Stock({
-			sucursalCodigo: mongoose.Schema.Types.ObjectId(req.body.sucursalCodigo),
-			productoCodigo: mongoose.Schema.Types.ObjectId(req.body.productoCodigo),
-			cantidad: req.body.cantidad
+		var sucursalCodigo = req.body.sucursalCodigo
+		var productoCodigo = req.body.productoCodigo
+		var checkStock = await Stock.findOne({ 
+			'sucursalCodigo': sucursalCodigo, 
+			'productoCodigo' : productoCodigo 
 		});
-		await stock.save();
-		res.status(200).send('Stock agregado');
+		if (checkStock) {
+			res.status(400).send('Stock ya existe para ese Producto y Sucursal');
+		} else {
+			var stock = new Stock({
+				sucursalCodigo: new mongoose.Types.ObjectId(sucursalCodigo),
+				productoCodigo: new mongoose.Types.ObjectId(productoCodigo),
+				cantidad: req.body.cantidad
+			});
+			await stock.save();
+			res.status(200).send('Stock agregado');
+		}
 	};
 	
 	var get = async function(req, res){

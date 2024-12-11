@@ -1,13 +1,18 @@
 var productoController = function(Producto) {	
 
 	var post = async function(req, res){
-		var producto = new Producto({
-			productoCodigo: req.body.productoCodigo,
-			productoNombre: req.body.productoNombre,
-			productoDescripcion: req.body.productoDescripcion
-		});
-		await producto.save();
-		res.status(200).send('Producto agregado');
+		var checkProducto = await Producto.findOne({ 'productoCodigo' : req.body.productoCodigo });
+		if (checkProducto) {
+			res.status(400).send('Código de producto ya existe');
+		} else {
+			var producto = new Producto({
+				productoCodigo: req.body.productoCodigo,
+				productoNombre: req.body.productoNombre,
+				productoDescripcion: req.body.productoDescripcion
+			});
+			await producto.save();
+			res.status(200).send('Producto agregado');
+		}
 	};
 	
 	var get = async function(req, res){	

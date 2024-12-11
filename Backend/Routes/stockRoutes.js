@@ -22,7 +22,6 @@ var routes = function(Stock){
 					model: 'Sucursal'
 				}
 			);
-		console.log(stock);
 		if (stock) {
 			req.stock = stock;
 			next();

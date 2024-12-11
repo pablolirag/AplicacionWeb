@@ -20,15 +20,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
-var productoRouter = require('./Routes/productoRoutes')(Producto);
+var productoRouter = require('./routes/productoRoutes')(Producto);
 
 app.use('/api/Producto', productoRouter);
 
-var sucursalRouter = require('./Routes/sucursalRoutes')(Sucursal);
+var sucursalRouter = require('./routes/sucursalRoutes')(Sucursal);
 
 app.use('/api/Sucursal', sucursalRouter);
 
-var stockRouter = require('./Routes/stockRoutes')(Stock);
+var stockRouter = require('./routes/stockRoutes')(Stock);
 
 app.use('/api/Stock', stockRouter);
 
