@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 
 var path = require('path');
 
-var db = mongoose.connect('mongodb://localhost:27017/AplicacionWeb');
+var db = mongoose.connect('mongodb://mongo:27017/AplicacionWeb');
 
 var Producto = require('./models/productoModel');
 var Stock = require('./models/stockModel');
