@@ -3,7 +3,7 @@
 		<title>Listado de stock</title>
 		<script type="text/javascript" src="/jquery-1.12.1.min.js"></script>
 		<script type="text/javascript">
-			function EliminarProducto(id){
+			function EliminarStock(id){
 				$.ajax({
 					url: 'http://localhost:3000/api/stock/' + id,
 					type: 'DELETE',

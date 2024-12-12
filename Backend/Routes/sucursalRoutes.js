@@ -9,9 +9,10 @@ var routes = function(Sucursal){
 	sucursalRouter.route('/')
 		.post(sucursalController.post)
 		.get(sucursalController.get);
-        sucursalRouter.use('/:sucursalId', async function(req, res, next){
+
+	sucursalRouter.use('/:sucursalId', async function(req, res, next){
 		var sucursalToFind = new Sucursal();
-		sucursalToFind._id = req.params.productoId;
+		sucursalToFind._id = req.params.sucursalId;
 		var sucursal = await Sucursal.findOne(sucursalToFind);
 		if (sucursal) {
 			req.sucursal = sucursal;

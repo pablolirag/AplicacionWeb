@@ -3,9 +3,11 @@ var express = require('express');
 var routes = function(Stock){
 	var stockRouter = express.Router();
 	var stockController = require('../controllers/stockController')(Stock);
+
 	stockRouter.route('/')
 		.post(stockController.post)
 		.get(stockController.get);
+
 	stockRouter.use('/:stockId', async function(req, res, next){
 		var stockToFind = new Stock();
 		stockToFind._id = req.params.stockId;
@@ -29,6 +31,7 @@ var routes = function(Stock){
 			res.status(404).send('Stock no encontrado');
 		}
 	});
+	
 	stockRouter.route('/:stockId')
 		.get(function(req, res){
 			var returnStock = req.stock.toJSON();
