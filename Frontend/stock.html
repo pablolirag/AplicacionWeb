@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>Listado de stock</title>
+		<script type="text/javascript" src="/jquery-1.12.1.min.js"></script>
+		<script type="text/javascript">
+			function EliminarStock(id){
+				$.ajax({
+					url: 'http://localhost:3000/api/stock/' + id,
+					type: 'DELETE',
+					error: function (xhr, ajaxOptions, thrownError) {
+						alert(xhr.responseText);
+					},
+					success: function(result) {
+						alert(result);
+						Refrescar();
+					}
+				});
+			}
+			function Refrescar() {	
+				$('#listado-stock').html('');
+				$('#listado-stock').append('<tr><td>Sucursal</td><td>Producto</td><td>Cantidad</td><td>Acciones</td></tr>');
+				$.ajax({
+					url: 'http://localhost:3000/api/stock',
+					type: 'GET',
+					error: function (xhr, ajaxOptions, thrownError) {
+						alert(xhr.responseText);
+					},
+					success: function(result) {
+						if (result.length) {
+							for(i = 0;i < result.length; i++) {
+								$('#listado-stock').append(
+									'<tr><td>' + result[i].sucursalCodigo.sucursalNombre + '</td><td>' + 
+										result[i].productoCodigo.productoNombre + '</td><td>' + 
+										result[i].cantidad + '</td><td>' + 
+										'<a href="modificarStock.html?_id=' + result[i]._id + '">Modificar</a> | <a class="eliminar" href="javascript:EliminarStock(\'' + result[i]._id + '\');">Eliminar</a></td></tr>'
+								);
+							}
+						}
+						else {
+							$('#listado-stock').append('<tr><td colspan="4">No se encontraron productos.</td></tr>');
+						}
+					}
+				});
+			}
+			$(function(){
+				Refrescar();
+			});
+		</script>
+	</head>
+	<body>
+		<div><a href="sucursal.html">Sucursales</a> | <a href="productos.html">Productos</a> | <a href="stock.html">Stock</a></div>
+		<h1>Listado de stock</h1>
+		<a href="agregarStock.html">Agregar</a><br /><br />
+		<table id="listado-stock" border="1">
+		</table>
+		<br />
+		<a href="javascript:history.go(0);">Refrescar</a>
+	</body>
+</html>

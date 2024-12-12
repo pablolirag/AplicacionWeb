@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<title>Modificar sucursal</title>
+		<script type="text/javascript" src="./jquery-1.12.1.min.js"></script>
+		<script type="text/javascript">
+		
+			function getParameterByName(name, url) {
+				if (!url) url = window.location.href;
+				name = name.replace(/[\[\]]/g, "\\$&");
+				var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+				results = regex.exec(url);
+				if (!results) return null;
+				if (!results[2]) return '';
+				return decodeURIComponent(results[2].replace(/\+/g, " "));
+			}
+		
+			$(function(){
+				$('#_id').val(getParameterByName('_id'));
+				$.ajax({
+					url: 'http://localhost:3000/api/sucursal/' + $('#_id').val(),
+					type: 'GET',
+					error: function (xhr, ajaxOptions, thrownError) {
+						alert(xhr.responseText);
+					},
+					success: function(result) {
+						$('#sucursalCodigo').val(result.sucursalCodigo);
+						$('#sucursalNombre').val(result.sucursalNombre);
+						$('#sucursalDescripcion').val(result.sucursalDescripcion);
+					}
+				});
+			
+				$('#modificar-sucursal').click(function(){
+					$.ajax({
+						url: 'http://localhost:3000/api/sucursal/' + $('#_id').val(),
+						type: 'PUT',
+						data: {
+							_id: $('#_id').val(),
+							sucursalCodigo: $('#sucursalCodigo').val(),
+							sucursalNombre: $('#sucursalNombre').val(),
+							sucursalDescripcion: $('#sucursalDescripcion').val()
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+							alert(xhr.responseText);
+						},
+						success: function(result) {
+							alert(result);
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Modificar sucursal</h1>
+		<h5><a href="sucursal.html">Volver</a></h5>
+		<table border="1">
+			<tr><td>C&oacute;digo:</td><td><input type="text" id="sucursalCodigo" /></td></tr>
+			<tr><td>Nombre:</td><td><input type="text" id="sucursalNombre" /></td></tr>
+			<tr><td>Descripci&oacute;n:</td><td><textarea rows="5" id="sucursalDescripcion"></textarea></td></tr>
+		</table>
+		<input type="hidden" id="_id" />
+		<input type="button" id="modificar-sucursal" value="Guardar" />
+		<span id="mensaje-resultado"></span>
+		<br />
+		<a href="javascript:history.go(0);">Refrescar</a>
+	</body>
+</html>

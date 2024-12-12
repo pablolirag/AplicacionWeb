@@ -3,90 +3,53 @@
 		<title>Listado de productos</title>
 		<script type="text/javascript" src="/jquery-1.12.1.min.js"></script>
 		<script type="text/javascript">
-		
 			function EliminarProducto(id){
-				
 				$.ajax({
-			
 					url: 'http://localhost:3000/api/producto/' + id,
-					
 					type: 'DELETE',
-					
 					error: function (xhr, ajaxOptions, thrownError) {
-					
-						alert(xhr.status);
-						
-						alert(thrownError);
-						
+						alert(xhr.responseText);
 					},
-					
 					success: function(result) {
-					
 						alert(result);
-						
 						Refrescar();
-						
 					}
-					
 				});
-			
 			}
-			
+
 			function Refrescar() {
-				
 					$('#listado-productos').html('');
-					
 					$('#listado-productos').append('<tr><td>C&oacute;digo</td><td>Nombre</td><td>Descripci&oacute;n</td><td>Acciones</td></tr>');
-				
 					$.ajax({
-						
 						url: 'http://localhost:3000/api/producto',
-						
 						type: 'GET',
-						
 						error: function (xhr, ajaxOptions, thrownError) {
-						
-							alert(xhr.status);
-							
-							alert(thrownError);
-							
+							alert(xhr.responseText);
 						},
-						
 						success: function(result) {
-						
 							if (result.length) {
-							
 								for(i = 0;i < result.length; i++) {
-								
-									$('#listado-productos').append('<tr><td>' + result[i].productoCodigo + '</td><td>' + 
-																				result[i].productoNombre + '</td><td>' + 
-																				result[i].productoDescripcion + '</td><td>' + 
-																				'<a href="modificarProducto.html?_id=' + result[i]._id + '">Modificar</a> | <a class="eliminar" href="javascript:EliminarProducto(\'' + result[i]._id + '\');">Eliminar</a></td></tr>');
-								
+									$('#listado-productos').append('<tr><td>' + 
+										result[i].productoCodigo + '</td><td>' + 
+										result[i].productoNombre + '</td><td>' + 
+										result[i].productoDescripcion + '</td><td>' + 
+										'<a href="modificarProducto.html?_id=' + result[i]._id + '">Modificar</a> | <a class="eliminar" href="javascript:EliminarProducto(\'' + result[i]._id + '\');">Eliminar</a></td></tr>'
+									);
 								}
-							
 							}
 							else {
-							
 								$('#listado-productos').append('<tr><td colspan="4">No se encontraron productos.</td></tr>');
-							
 							}
-							
 						}
 					});
-				
 				}
-		
 			$(function(){
-			
 				Refrescar();
-			
 			});
-		
 		</script>
 	</head>
 	<body>
-		<div><a href="sucursales.html">Sucursales</a> | <a href="productos.html">Productos</a> | <a href="stock.html">Stock</a></div>
+		<div><a href="sucursal.html">Sucursales</a> | <a href="productos.html">Productos</a> | <a href="stock.html">Stock</a></div>
 		<h1>Listado de productos</h1>
 		<a href="agregarProducto.html">Agregar</a><br /><br />
 		<table id="listado-productos" border="1">
